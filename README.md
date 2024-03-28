@@ -1,6 +1,6 @@
 # Game_for_GameContest2024
 
-A game for g-bits Game Producer Contest 2024
+A game for both lesson and Game Contests 2024
 
 ## 一些约定
 
