@@ -3,11 +3,11 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [CreateAssetMenu(menuName = "Events/FuncCallback")]
-public class FuncCallbackEventSO<T> : ScriptableObject
+public class FuncCallbackEventSO : ScriptableObject
 {
-    public UnityAction<Func<T>> onEventRaised;
+    public UnityAction<Func<object>> onEventRaised;
 
-    public void RaiseEvent(Func<T> callback)
+    public void RaiseEvent(Func<object> callback)
     {
         onEventRaised?.Invoke(callback);
     }

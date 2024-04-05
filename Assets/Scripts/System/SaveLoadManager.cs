@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.IO;
 using UnityEngine;
 using SaveLoad;
@@ -11,11 +12,12 @@ public class SaveLoadManager : MonoBehaviour
     private const string SAVEARRAY = "saveDataArray.json";
 
     [Header("事件监听")]
-    private static ActionCallbackEventSO<GameSaveArray> getSavesEventSO;
+        private ActionCallbackEventSO getSavesEventSO;
 
     private void Awake()
     {
         InitSaveArray();
+        InitEventSO();
     }
 
     private void OnEnable()
@@ -39,11 +41,23 @@ public class SaveLoadManager : MonoBehaviour
             var filePath = SAVEPATH + SAVEARRAY;
             if (File.Exists(filePath))
             {
+                Debug.Log("加载存档json文件");
                 var json = File.ReadAllText(filePath);
                 _saveArray = JsonUtility.FromJson<GameSaveArray>(json);
             }
-
+            else
+            {
+                Debug.Log("新建存档json文件");
+                var json = JsonUtility.ToJson(_saveArray);
+                File.WriteAllText(filePath, json);
+            }
+ 
             _saveArray.saves.onChanged += UpdateSaveArrayJson;
+        }
+
+        private void InitEventSO()
+        {
+            getSavesEventSO = Resources.Load<ActionCallbackEventSO>("Events/GetSavesEventSO");
         }
 
     #endregion
@@ -63,24 +77,15 @@ public class SaveLoadManager : MonoBehaviour
         /// 删除存档
         /// </summary>
         /// <param name="deletedSave"></param>
-        public void RemoveSave(GameSave deletedSave)
-        {
-            _saveArray.saves.Remove(deletedSave);
-        }
+        public void RemoveSave(GameSave deletedSave) => _saveArray.saves.Remove(deletedSave);
     
-        public void LoadSave(GameSave save)
-        {
-            
-        }
+        public void LoadSave(GameSave save) => _currentSave = save;
         
         /// <summary>
         /// 重置存档
         /// </summary>
         /// <param name="save"></param>
-        public void ResetSave(GameSave save)
-        {
-            save.ResetSave();
-        }
+        public void ResetSave(GameSave save) => save.ResetSave();
     
         /// <summary>
         /// 当存档数量改变时更新json文件
@@ -93,8 +98,19 @@ public class SaveLoadManager : MonoBehaviour
 
     #endregion
 
-    private void RequestForData(Action<GameSaveArray> callback)
+    /// <summary>
+    /// 用于回调传递存档数组
+    /// </summary>
+    /// <param name="callback"></param>
+    private void RequestForData(Action<object> callback)
     {
-        callback(_saveArray);
+        if (callback is Action<GameSaveArray> gameSaveArrayCallback)
+        {
+            gameSaveArrayCallback.Invoke(_saveArray);
+        }
+        else
+        {
+            Debug.LogError("调取存档数据时回调函数传递有误");
+        }
     }
 }

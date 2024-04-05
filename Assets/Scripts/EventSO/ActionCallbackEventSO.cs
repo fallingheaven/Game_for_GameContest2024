@@ -3,11 +3,11 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [CreateAssetMenu(menuName = "Events/ActionCallback")]
-public class ActionCallbackEventSO<T> : ScriptableObject
+public class ActionCallbackEventSO : ScriptableObject
 {
-    public UnityAction<Action<T>> onEventRaised;
+    public UnityAction<Action<object>> onEventRaised;
 
-    public void RaiseEvent(Action<T> callback)
+    public void RaiseEvent(Action<object> callback)
     {
         onEventRaised?.Invoke(callback);
     }
