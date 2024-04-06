@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public GameSceneSO newGameScene;
+    
     private SaveLoadManager _saveLoadManager;
+    private SceneLoadManager _sceneLoadManager;
 
     private void Awake()
     {
-        _saveLoadManager = GetComponent<SaveLoadManager>();
+        _saveLoadManager = SaveLoadManager.Instance;
+        _sceneLoadManager = SceneLoadManager.Instance;
     }
 
     public void StartNewGame()
@@ -17,7 +21,8 @@ public class GameManager : MonoBehaviour
         _saveLoadManager.AddSave(newSave);
         _saveLoadManager.LoadSave(newSave);
 
-        //TODO:跳转到游戏开局
+        //DONE:跳转到游戏开局
+        StartCoroutine(_sceneLoadManager.LoadSceneAsync(newGameScene));
     }
 
     public void LoadSave(GameSave save)

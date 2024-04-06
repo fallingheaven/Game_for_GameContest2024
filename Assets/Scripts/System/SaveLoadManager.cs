@@ -3,8 +3,9 @@ using System.Collections;
 using System.IO;
 using UnityEngine;
 using SaveLoad;
+using Utility.CustomClass;
 
-public class SaveLoadManager : MonoBehaviour
+public class SaveLoadManager : Singleton<SaveLoadManager>
 {
     private GameSaveArray _saveArray;
     private GameSave _currentSave;
