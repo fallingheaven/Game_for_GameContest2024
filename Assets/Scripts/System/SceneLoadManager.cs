@@ -1,12 +1,21 @@
+using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.ResourceManagement.AsyncOperations;
-using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 using Utility.CustomClass;
+using Utility.Interface;
 
 public class SceneLoadManager : Singleton<SceneLoadManager>
 {
+    private void OnEnable()
+    {
+        EventManager.Instance.SubscribeEvent<AfterSceneLoadEvent>(OnSceneLoaded);
+    }
+    
+    private void OnDisable()
+    {
+        EventManager.Instance.UnsubscribeEvent<AfterSceneLoadEvent>(OnSceneLoaded);
+    }
 
     public void UnloadScene(GameSceneSO sceneAsset)
     {
@@ -15,9 +24,8 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
 
     public IEnumerator LoadSceneAsync(GameSceneSO sceneAsset)
     {
-        Debug.Log("1");
         var operation = sceneAsset.targetScene.LoadSceneAsync(LoadSceneMode.Additive, false);
-        Debug.Log("2");
+        
         while (!operation.IsDone)
         {
             var value = operation.PercentComplete;
@@ -25,12 +33,17 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
             
             yield return null;
         }
-        Debug.Log("3");
-        StartCoroutine(OnSceneLoaded(operation));
+
+        var onSceneLoadedMessage = new AfterSceneLoadEvent(operation);
+        EventManager.Instance.InvokeEvent<AfterSceneLoadEvent>(onSceneLoadedMessage);
     }
 
-    private IEnumerator OnSceneLoaded(AsyncOperationHandle<SceneInstance> operation)
+    private void OnSceneLoaded(IEventMessage message)
     {
-        yield return operation.Result.ActivateAsync();
+        if (message is AfterSceneLoadEvent msg)
+        {
+            msg.operation.Result.ActivateAsync();
+        }
+        
     }
 }

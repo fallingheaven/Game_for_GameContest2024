@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public GameSceneSO newGameScene;
+    public GameSceneSO[] gameSceneArray;
     
     private SaveLoadManager _saveLoadManager;
     private SceneLoadManager _sceneLoadManager;
@@ -30,6 +31,7 @@ public class GameManager : MonoBehaviour
         _saveLoadManager.LoadSave(save);
         
         // TODO:跳转到游戏存档位置
+        StartCoroutine(SceneLoadManager.Instance.LoadSceneAsync(gameSceneArray[save.levelIndex]));
     }
 
     public void DeleteSave(GameSave save)
