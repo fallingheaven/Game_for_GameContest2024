@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.IO;
 using UnityEngine;
 using SaveLoad;
@@ -10,6 +8,7 @@ public class SaveLoadManager : Singleton<SaveLoadManager>
     private GameSave _currentSave;
     private const string SAVEPATH = "Assets/Resources/Saves/";
     private const string SAVEARRAY = "saveDataArray.json";
+    private const string filePath = SAVEPATH + SAVEARRAY;
 
     public GameSaveArray GetSaveArray { get; private set; }
 
@@ -26,17 +25,23 @@ public class SaveLoadManager : Singleton<SaveLoadManager>
         private void InitSaveArray()
         {
             GetSaveArray = new GameSaveArray();
-            var filePath = SAVEPATH + SAVEARRAY;
+            
             if (File.Exists(filePath))
             {
                 Debug.Log("加载存档json文件");
                 var json = File.ReadAllText(filePath);
-                JsonUtility.FromJsonOverwrite(json, GetSaveArray);
+                // Debug.Log(json);
+                var saveArray = JsonUtility.FromJson<SaveJson>(json);
+                GetSaveArray.saves = ObservedList<GameSave>.ArrayToList(saveArray.saves);
             }
             else
             {
                 Debug.Log("新建存档json文件");
-                var json = JsonUtility.ToJson(GetSaveArray);
+                var saveJson = new SaveJson
+                {
+                    saves = GetSaveArray.saves.ToArray()
+                };
+                var json = JsonUtility.ToJson(saveJson);
                 File.WriteAllText(filePath, json);
             }
  
@@ -75,10 +80,21 @@ public class SaveLoadManager : Singleton<SaveLoadManager>
         /// </summary>
         private void UpdateSaveArrayJson()
         {
-            var json = JsonUtility.ToJson(GetSaveArray);
+            var saveJson = new SaveJson
+            {
+                saves = GetSaveArray.saves.ToArray()
+            };
+
+            var json = JsonUtility.ToJson(saveJson);
+            // Debug.Log(json);
             File.WriteAllText(SAVEPATH + SAVEARRAY, json);
         }
 
     #endregion
     
+}
+[System.Serializable]
+public class SaveJson
+{
+    public GameSave[] saves = {};
 }
