@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace Utility.CustomClass
@@ -29,6 +30,17 @@ namespace Utility.CustomClass
         private void OnChanged()
         {
             onChanged?.Invoke();
+        }
+
+        public static ObservedList<T> ArrayToList(T[] array)
+        {
+            ObservedList<T> newList = new ObservedList<T>();
+            foreach (var item in array)
+            {
+                newList.Add(item);
+            }
+            
+            return newList;
         }
     }
 }

@@ -1,8 +1,8 @@
-using System;
 using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 using SaveLoad;
+using UnityEngine.UI;
 using Utility.CustomClass;
 
 public class SavePanelManager : Singleton<SavePanelManager>
@@ -35,8 +35,9 @@ public class SavePanelManager : Singleton<SavePanelManager>
         public async Task ShowSaves()
         {
             await GetSaves();
-            
-            StartCoroutine(ShowSaveInOrder());
+
+            Debug.Log(0);
+            await ShowSaveInOrder();
         }
     
         private async Task GetSaves()
@@ -44,18 +45,24 @@ public class SavePanelManager : Singleton<SavePanelManager>
             _saveArray = await Task.Run(() => SaveLoadManager.Instance.GetSaveArray);
         }
     
-        private IEnumerator ShowSaveInOrder()
+        private async Task ShowSaveInOrder()
         {
+            Debug.Log(0.5f);
+            var choicePanel = Instantiate(choicePanelPrefab, transform);
+            Debug.Log(choicePanel == null);
+            Debug.Log(1);
+            
             //UI的显示初始化
             foreach (var save in _saveArray.saves)
             {
-                var panel = GameObject.Instantiate(saveInfoPanelPrefab, transform, false).GetComponent<SaveInfoPanel>();
+                var panelObj = Instantiate(saveInfoPanelPrefab, transform);
+                var panel = panelObj.GetComponent<SaveInfoPanel>();
                 
                 panel.save = save;
-                panel.choicePanel = GameObject.Instantiate(choicePanelPrefab, transform, false);
+                panel.choicePanel = choicePanel;
+
+                await Task.Delay(10);// 等待10毫秒
             }
-            
-            yield return null;
         }
 
     #endregion
