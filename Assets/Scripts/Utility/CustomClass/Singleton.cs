@@ -21,6 +21,7 @@ namespace Utility.CustomClass
 
                 return _instance;
             }
+            set => _instance = value;
         }
     }
 }

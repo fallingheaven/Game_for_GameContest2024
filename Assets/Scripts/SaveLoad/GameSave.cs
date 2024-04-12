@@ -3,11 +3,13 @@ using Utility.CustomClass;
 
 namespace SaveLoad
 {
+    [System.Serializable]
     public class GameSaveArray
     {
         public ObservedList<GameSave> saves = new ObservedList<GameSave>();
     }
     
+    [System.Serializable]
     public class GameSave
     {
         public int levelIndex;

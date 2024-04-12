@@ -31,7 +31,7 @@ public class SaveLoadManager : Singleton<SaveLoadManager>
             {
                 Debug.Log("加载存档json文件");
                 var json = File.ReadAllText(filePath);
-                GetSaveArray = JsonUtility.FromJson<GameSaveArray>(json);
+                JsonUtility.FromJsonOverwrite(json, GetSaveArray);
             }
             else
             {
@@ -75,7 +75,7 @@ public class SaveLoadManager : Singleton<SaveLoadManager>
         /// </summary>
         private void UpdateSaveArrayJson()
         {
-            var json = JsonUtility.ToJson(GetSaveArray.saves);
+            var json = JsonUtility.ToJson(GetSaveArray);
             File.WriteAllText(SAVEPATH + SAVEARRAY, json);
         }
 

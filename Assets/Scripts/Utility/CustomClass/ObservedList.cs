@@ -3,6 +3,7 @@ using UnityEngine.Events;
 
 namespace Utility.CustomClass
 {
+    [System.Serializable]
     public class ObservedList<T> : List<T>
     {
         public UnityAction onChanged;

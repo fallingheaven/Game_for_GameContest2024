@@ -1,8 +1,9 @@
 using System;
 using SaveLoad;
 using UnityEngine;
+using Utility.CustomClass;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
     public GameSceneSO newGameScene;
     public GameSceneSO[] gameSceneArray;
@@ -12,6 +13,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        GameManager.Instance = this;
         _saveLoadManager = SaveLoadManager.Instance;
         _sceneLoadManager = SceneLoadManager.Instance;
     }
