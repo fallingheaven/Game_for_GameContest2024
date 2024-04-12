@@ -1,21 +1,30 @@
-using System;
+using PimDeWitte.UnityMainThreadDispatcher;
 using SaveLoad;
-using UnityEngine;
 using Utility.CustomClass;
 
 public class GameManager : Singleton<GameManager>
 {
+    public GameSceneSO currentGameScene;
     public GameSceneSO newGameScene;
     public GameSceneSO[] gameSceneArray;
     
+    // 为了创建实例
     private SaveLoadManager _saveLoadManager;
     private SceneLoadManager _sceneLoadManager;
+    private EventManager _eventManager;
 
     private void Awake()
     {
         GameManager.Instance = this;
         _saveLoadManager = SaveLoadManager.Instance;
         _sceneLoadManager = SceneLoadManager.Instance;
+        _eventManager = EventManager.Instance;
+        gameObject.AddComponent<UnityMainThreadDispatcher>();
+    }
+
+    private void OnEnable()
+    {
+        StartCoroutine(_sceneLoadManager.LoadSceneAsync(currentGameScene));
     }
 
     public void StartNewGame()
@@ -25,28 +34,35 @@ public class GameManager : Singleton<GameManager>
         _saveLoadManager.LoadSave(newSave);
 
         //DONE:跳转到游戏开局
+        _sceneLoadManager.UnloadScene(currentGameScene);
         StartCoroutine(_sceneLoadManager.LoadSceneAsync(newGameScene));
     }
 
-    public void LoadSave(GameSave save)
-    {
-        _saveLoadManager.LoadSave(save);
-        
-        // TODO:跳转到游戏存档位置
-        StartCoroutine(SceneLoadManager.Instance.LoadSceneAsync(gameSceneArray[save.levelIndex]));
-    }
+    #region 存档相关
 
-    public void DeleteSave(GameSave save)
-    {
-        _saveLoadManager.RemoveSave(save);
-        
-        // TODO: 确认删除、删除成功提示等
-    }
+        public void LoadSave(GameSave save)
+        {
+            _saveLoadManager.LoadSave(save);
+            
+            // TODO:跳转到游戏存档位置
+            currentGameScene = gameSceneArray[save.levelIndex];
+            StartCoroutine(SceneLoadManager.Instance.LoadSceneAsync(gameSceneArray[save.levelIndex]));
+        }
+    
+        public void DeleteSave(GameSave save)
+        {
+            _saveLoadManager.RemoveSave(save);
+            
+            // TODO: 确认删除、删除成功提示等
+        }
+    
+        public void ResetSave(GameSave save)
+        {
+            _saveLoadManager.ResetSave(save);
+            
+            // TODO: 确认重置，重置成功提示等
+        }
 
-    public void ResetSave(GameSave save)
-    {
-        _saveLoadManager.ResetSave(save);
-        
-        // TODO: 确认重置，重置成功提示等
-    }
+    #endregion
+    
 }

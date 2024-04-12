@@ -14,16 +14,20 @@ public class SaveChoosePanel : MonoBehaviour
     public void DeleteSave()
     {
         GameManager.Instance.DeleteSave(save);
+        
+        RefreshPanel();
     }
     
     public void ResetSave()
     {
         GameManager.Instance.ResetSave(save);
+
         RefreshPanel();
     }
     
     private void RefreshPanel()
     {
+        gameObject.SetActive(false);
         Task.Run(SavePanelManager.Instance.ShowSaves);
     }
 }

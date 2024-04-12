@@ -1,12 +1,16 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
 using Utility.CustomClass;
 using Utility.Interface;
 
 public class SceneLoadManager : Singleton<SceneLoadManager>
 {
+    private Dictionary<AssetReference, bool> _isLoaded = new Dictionary<AssetReference, bool>();
+    
     private void OnEnable()
     {
         EventManager.Instance.SubscribeEvent<AfterSceneLoadEvent>(OnSceneLoaded);
@@ -19,11 +23,27 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
 
     public void UnloadScene(GameSceneSO sceneAsset)
     {
+        if (!_isLoaded.ContainsKey(sceneAsset.targetScene))
+        {
+            Debug.LogWarning($"{sceneAsset.targetScene} 未被加载，卸载失败");
+            return;
+        }
+        
+        _isLoaded.Remove(sceneAsset.targetScene);
+        
         sceneAsset.targetScene.UnLoadScene();
     }
 
     public IEnumerator LoadSceneAsync(GameSceneSO sceneAsset)
     {
+        if (_isLoaded.ContainsKey(sceneAsset.targetScene))
+        {
+            Debug.LogWarning($"{sceneAsset.targetScene} 已经被加载");
+            yield break;
+        }
+
+        _isLoaded[sceneAsset.targetScene] = true;
+        
         var operation = sceneAsset.targetScene.LoadSceneAsync(LoadSceneMode.Additive, false);
         
         while (!operation.IsDone)

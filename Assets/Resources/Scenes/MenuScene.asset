@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8dbaad0e84a2784bba9bdcf4d01596c, type: 3}
-  m_Name: NewGameScene
+  m_Name: MenuScene
   m_EditorClassIdentifier: 
   targetScene:
-    m_AssetGUID: 1f9654056aee52946a29b929bed350ef
+    m_AssetGUID: 6ddea58dd8242c3498b893df9f16bfd7
     m_SubObjectName: 
     m_SubObjectType: 
-    m_EditorAssetChanged: 0
+    m_EditorAssetChanged: 1
   initPosition: {x: 0, y: 0, z: 0}

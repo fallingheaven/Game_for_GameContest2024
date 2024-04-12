@@ -35,13 +35,13 @@ public class SaveInfoPanel : MonoBehaviour
             levelInfo.text = "";
             playTimeInfo.text = "";
         }
-
-        choicePanel.GetComponent<SaveChoosePanel>().save = save;
+        
     }
 
     public void OnSelected()
     {
         // TODO: 动画显示
+        choicePanel.GetComponent<SaveChoosePanel>().save = save;
         choicePanel.SetActive(true);
     }
 }

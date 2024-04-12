@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Threading.Tasks;
+using PimDeWitte.UnityMainThreadDispatcher;
 using UnityEngine;
 using SaveLoad;
 using UnityEngine.UI;
@@ -34,10 +35,18 @@ public class SavePanelManager : Singleton<SavePanelManager>
 
         public async Task ShowSaves()
         {
+            UnityMainThreadDispatcher.Instance().Enqueue(() =>
+            {
+                for (var i = 0; i < transform.childCount; i++)
+                {
+                    Destroy(transform.GetChild(i).gameObject);
+                }
+            });
+            
             await GetSaves();
-
-            Debug.Log(0);
-            await ShowSaveInOrder();
+            
+            // Instantiate方法只能在主线程中使用
+            UnityMainThreadDispatcher.Instance().Enqueue(ShowSaveInOrder());
         }
     
         private async Task GetSaves()
@@ -45,12 +54,11 @@ public class SavePanelManager : Singleton<SavePanelManager>
             _saveArray = await Task.Run(() => SaveLoadManager.Instance.GetSaveArray);
         }
     
-        private async Task ShowSaveInOrder()
+        private IEnumerator ShowSaveInOrder()
         {
-            Debug.Log(0.5f);
-            var choicePanel = Instantiate(choicePanelPrefab, transform);
-            Debug.Log(choicePanel == null);
-            Debug.Log(1);
+            ResizeViewport();
+            
+            var choicePanel = Instantiate(choicePanelPrefab, transform.parent);
             
             //UI的显示初始化
             foreach (var save in _saveArray.saves)
@@ -61,8 +69,14 @@ public class SavePanelManager : Singleton<SavePanelManager>
                 panel.save = save;
                 panel.choicePanel = choicePanel;
 
-                await Task.Delay(10);// 等待10毫秒
+                yield return new WaitForSeconds(0.1f);
             }
+        }
+
+        private void ResizeViewport()
+        {
+            var rectTransform = GetComponent<RectTransform>();
+            rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, 200f * _saveArray.saves.Count);
         }
 
     #endregion
