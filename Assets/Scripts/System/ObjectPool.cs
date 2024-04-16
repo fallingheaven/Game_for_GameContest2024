@@ -22,6 +22,9 @@ public class ObjectPool : Singleton<ObjectPool>
         InitObjectPool();
     }
 
+    /// <summary>
+    /// 初始化预设的角色池
+    /// </summary>
     private void InitObjectPool()
     {
         foreach (var pool in pools)
@@ -30,8 +33,17 @@ public class ObjectPool : Singleton<ObjectPool>
         }
     }
 
-    private void AddNewPool(Pool newPool)
+    /// <summary>
+    /// 添加新类型的角色池
+    /// </summary>
+    /// <param name="newPool"></param>
+    public void AddNewPool(Pool newPool)
     {
+        if (poolDictionary.ContainsKey(newPool.tag))
+        {
+            Debug.LogWarning($"已存在{tag}类型对象池");
+        }
+        
         var objectPool = new Queue<GameObject>();
 
         for (var i = 1; i <= newPool.count; i++)
@@ -44,6 +56,13 @@ public class ObjectPool : Singleton<ObjectPool>
         poolDictionary[newPool.tag] = objectPool;
     }
 
+    /// <summary>
+    /// 从角色池中取物体
+    /// </summary>
+    /// <param name="objTag"></param>
+    /// <param name="position"></param>
+    /// <param name="quaternion"></param>
+    /// <returns></returns>
     public GameObject SpawnFromPool(string objTag, Vector3 position, Quaternion quaternion = default)
     {
         // 角色对象tag不存在

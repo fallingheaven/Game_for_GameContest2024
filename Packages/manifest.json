@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
     "com.pimdewitte.unitymainthreaddispatcher": "https://github.com/PimDeWitte/UnityMainThreadDispatcher.git",
     "com.unity.addressables": "1.21.20",
     "com.unity.collab-proxy": "2.0.5",
