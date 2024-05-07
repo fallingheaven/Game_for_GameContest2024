@@ -6,4 +6,6 @@ public class GameSceneSO : ScriptableObject
 {
     public AssetReference targetScene;
     public Vector3 initPosition;
+    public GameSceneSO nextScene;
+    public GameSceneSO lastScene;
 }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,12 +33,25 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
         sceneAsset.targetScene.UnLoadScene();
     }
 
-    public IEnumerator LoadSceneAsync(GameSceneSO sceneAsset)
+    /// <summary>
+    /// 异步加载方法
+    /// </summary>
+    /// <param name="sceneAsset">场景资源</param>
+    /// <param name="forceLoad">是否强制加载（不论是否已经加载）</param>
+    /// <returns></returns>
+    public IEnumerator LoadSceneAsync(GameSceneSO sceneAsset, bool forceLoad = false)
     {
         if (_isLoaded.ContainsKey(sceneAsset.targetScene))
         {
-            Debug.LogWarning($"{sceneAsset.targetScene} 已经被加载");
-            yield break;
+            if (forceLoad)
+            {
+                yield return sceneAsset.targetScene.UnLoadScene().IsDone;
+            }
+            else
+            {
+                Debug.LogWarning($"{sceneAsset.targetScene} 已经被加载");
+                yield break;
+            }
         }
 
         _isLoaded[sceneAsset.targetScene] = true;
