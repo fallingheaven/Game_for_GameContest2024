@@ -1,35 +1,39 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Utility.CustomClass;
 using Utility.Interface;
 
 public class InputManager : Singleton<InputManager>
 {
-    private Queue<ICommand> _commandQueue;
-    private float _commandTimeOut = 0.2f;
-
-    // TODO: 当玩家进出可交互物体触发器时更新
-    public IInteract interactObj;
+    private readonly Queue<ICommand> _commandQueue = new();
+    private readonly HashSet<ICommand> _commandHashSet = new();
+    private float _commandTimeOut = 500f;
 
     private void Update()
     {
-        CommandExecute();
+        CommandExecute().Forget();
     }
 
-    private void CommandExecute()
+    private async UniTaskVoid CommandExecute()
     {
         while (_commandQueue.Count > 0)
         {
             var command = _commandQueue.Dequeue();
-            if (Time.time - command.CommandTime <= _commandTimeOut)
-            {
-                command.Execute();
-            }
+            _commandHashSet.Remove(command);
+            if (Time.time - command.CommandTime > _commandTimeOut) continue;
+            
+            command.Execute();
         }
+
+        await UniTask.Yield();
     }
 
     public void AddCommand(ICommand command)
     {
+        if (_commandHashSet.Contains(command)) return;
+            
         _commandQueue.Enqueue(command);
+        _commandHashSet.Add(command);
     }
 }
