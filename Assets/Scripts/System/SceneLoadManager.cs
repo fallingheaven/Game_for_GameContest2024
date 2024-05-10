@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
+using Utility;
 using Utility.CustomClass;
 using Utility.Interface;
 
@@ -31,6 +32,7 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
         _isLoaded.Remove(sceneAsset.targetScene);
         
         sceneAsset.targetScene.UnLoadScene();
+        Debug.Log($"{sceneAsset.targetScene}被卸载");
     }
 
     /// <summary>
@@ -41,6 +43,13 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
     /// <returns></returns>
     public IEnumerator LoadSceneAsync(GameSceneSO sceneAsset, bool forceLoad = false)
     {
+        if (sceneAsset.type == SceneType.Level)
+        {
+            LevelManager.Instance.currentLevel = sceneAsset;
+        }
+        
+        UnloadScene(GameManager.Instance.currentGameScene);
+        
         if (_isLoaded.ContainsKey(sceneAsset.targetScene))
         {
             if (forceLoad)

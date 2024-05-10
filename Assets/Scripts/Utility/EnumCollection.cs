@@ -9,4 +9,9 @@ namespace Utility
     {
         Move, Interact
     }
+    
+    public enum SceneType
+    {
+        Level, Menu
+    }
 }

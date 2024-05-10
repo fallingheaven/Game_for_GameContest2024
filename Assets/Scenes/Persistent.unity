@@ -372,10 +372,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentGameScene: {fileID: 11400000, guid: 697b00df5440a364b90976d9b5d2dee0, type: 2}
-  newGameScene: {fileID: 11400000, guid: 0409a433b61b1d049bcdae15cf508610, type: 2}
+  newGameScene: {fileID: 11400000, guid: 18179135ab0c5384989bd9b8f309a34b, type: 2}
   gameSceneArray:
-  - {fileID: 11400000, guid: 697b00df5440a364b90976d9b5d2dee0, type: 2}
-  - {fileID: 11400000, guid: 0409a433b61b1d049bcdae15cf508610, type: 2}
+  - {fileID: 11400000, guid: 18179135ab0c5384989bd9b8f309a34b, type: 2}
+  - {fileID: 11400000, guid: 93680fefccda5a848b89ae2335107027, type: 2}
 --- !u!4 &1787786685
 Transform:
   m_ObjectHideFlags: 0

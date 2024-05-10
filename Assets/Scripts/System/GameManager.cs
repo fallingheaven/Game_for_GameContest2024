@@ -44,9 +44,9 @@ public class GameManager : Singleton<GameManager>
         {
             _saveLoadManager.LoadSave(save);
             
-            // TODO:跳转到游戏存档位置
-            currentGameScene = gameSceneArray[save.levelIndex];
+            // DONE:跳转到游戏存档位置，注意顺序
             StartCoroutine(SceneLoadManager.Instance.LoadSceneAsync(gameSceneArray[save.levelIndex]));
+            currentGameScene = gameSceneArray[save.levelIndex];
         }
     
         public void DeleteSave(GameSave save)
