@@ -1,5 +1,6 @@
 using PimDeWitte.UnityMainThreadDispatcher;
 using SaveLoad;
+using UnityEngine;
 using Utility.CustomClass;
 
 public class GameManager : Singleton<GameManager>
@@ -7,6 +8,9 @@ public class GameManager : Singleton<GameManager>
     public GameSceneSO currentGameScene;
     public GameSceneSO newGameScene;
     public GameSceneSO[] gameSceneArray;
+
+    public GameObject playerCharacter;
+    public GameObject virtualCamera;
     
     // 为了创建实例
     private SaveLoadManager _saveLoadManager;

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
@@ -77,6 +78,12 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
 
         var onSceneLoadedMessage = new AfterSceneLoadEvent(operation);
         EventManager.Instance.InvokeEvent<AfterSceneLoadEvent>(onSceneLoadedMessage);
+
+        if (sceneAsset.existPlayer)
+        {
+            GameManager.Instance.playerCharacter.transform.position = sceneAsset.initPosition;
+            GameManager.Instance.playerCharacter.SetActive(true);
+        }
     }
 
     private void OnSceneLoaded(IEventMessage message)

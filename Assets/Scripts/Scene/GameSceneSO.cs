@@ -6,6 +6,7 @@ using Utility;
 public class GameSceneSO : ScriptableObject
 {
     public AssetReference targetScene;
+    public bool existPlayer;
     public Vector3 initPosition;
     public GameSceneSO nextScene;
     public GameSceneSO lastScene;
