@@ -17,6 +17,9 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
+  existPlayer: 1
   initPosition: {x: 0, y: 0, z: 0}
   nextScene: {fileID: 0}
   lastScene: {fileID: 11400000, guid: 18179135ab0c5384989bd9b8f309a34b, type: 2}
+  type: 0
+  mapBoundary: 0
