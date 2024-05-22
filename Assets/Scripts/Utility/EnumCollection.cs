@@ -1,8 +1,10 @@
+using System;
+
 namespace Utility
 {
     public enum Element
     {
-        Null, Fire, Water, Wind
+        Wind, Fire, Water, Soil, Wood
     }
 
     public enum ECommand

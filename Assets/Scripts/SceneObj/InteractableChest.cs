@@ -4,7 +4,7 @@ using Utility.Interface;
 
 public class InteractableChest : MonoBehaviour, IInteract
 {
-    public void Interact(Element element = Element.Null)
+    public void Interact(CharacterBehavior interactor)
     {
         Debug.Log($"open the chest!");
     }

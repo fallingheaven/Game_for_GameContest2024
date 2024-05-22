@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 using Utility;
 using Utility.Interface;
 
@@ -32,24 +33,24 @@ public class MoveCommand : ICommand
 public class InteractCommand : ICommand
 {
     private IInteract _interactObj;
-    private Element _element;
+    private CharacterBehavior _interactor;
     
     public float CommandTime { get; set; }
 
-    public InteractCommand(IInteract interactObj, Element element = Element.Null)
+    public InteractCommand(IInteract interactObj, CharacterBehavior characterBehavior)
     {
-        Init(interactObj, element);
+        Init(interactObj, characterBehavior);
     }
 
-    public void Init(IInteract interactObj, Element element = Element.Null)
+    public void Init(IInteract interactObj, CharacterBehavior characterBehavior)
     {
         _interactObj = interactObj;
-        _element = element;
+        _interactor = characterBehavior;
         CommandTime = Time.time;
     }
     
     public void Execute()
     {
-        _interactObj.Interact(_element);
+        _interactObj.Interact(_interactor);
     }
 }
