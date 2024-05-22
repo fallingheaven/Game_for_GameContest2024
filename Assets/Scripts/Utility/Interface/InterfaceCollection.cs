@@ -24,7 +24,7 @@ namespace Utility.Interface
     /// </summary>
     public interface IInteract
     {
-        public void Interact(Element element = Element.Null);
+        public void Interact(CharacterBehavior interactor);
     }
 
     public abstract class IObjectPool
