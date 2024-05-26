@@ -17,7 +17,7 @@ public class CharacterBehavior : MonoBehaviour
     private Vector2 _faceDir = Vector2.down;
 
     private readonly Dictionary<ECommand, ICommand> _commandDictionary = new();
-
+    
     private void Start()
     {
         _commandDictionary[ECommand.Move] = new MoveCommand(Vector2.zero, null);
@@ -42,7 +42,6 @@ public class CharacterBehavior : MonoBehaviour
                 InputManager.Instance.AddCommand(new MoveCommand(moveDir, Move));
             }
         }
-        
         if (InputSystem.Interact && _interactObj != null)
         {
             var interactCommand = _commandDictionary[ECommand.Interact] as InteractCommand;
@@ -56,6 +55,7 @@ public class CharacterBehavior : MonoBehaviour
     private void CheckInteractObj(Vector2 colCenter)
     {
         var col = Physics2D.OverlapBox(colCenter, Vector2.one * 0.8f, 0, interactableMask);
+        
         if (col)
         {
             _interactObj = col.GetComponent<IInteract>();
@@ -86,10 +86,28 @@ public class CharacterBehavior : MonoBehaviour
 
     public void AbsorbElement(Element targetElement)
     {
-        if (CurrentElement != Element.Wind) return;
-        
-        CurrentElement = targetElement;
-        // TODO: 融合元素
+        if (CurrentElement == Element.Wind)
+        {
+           CurrentElement = targetElement; 
+        }
+        else if(CurrentElement >= Element.Rock)//已经是融合元素
+        {
+            Debug.Log("Current element has already been fused.");
+        }
+        else//融合
+        {
+            Element fusionResult;
+            if (Fusion.FusionMap[CurrentElement].TryGetValue(targetElement, out fusionResult))
+            {
+                CurrentElement = fusionResult;
+            }
+            else//没有相应的融合
+            {
+                Debug.Log("No fusion.");
+            }
+        }
+
+        Debug.Log(CurrentElement);
     }
 
     public void Die()
