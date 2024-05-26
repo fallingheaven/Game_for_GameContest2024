@@ -86,13 +86,9 @@ public class CharacterBehavior : MonoBehaviour
 
     public void AbsorbElement(Element targetElement)
     {
-        if (CurrentElement == Element.Wind)
+        if (CurrentElement is Element.Wind or >= Element.Rock)//没有元素或是融合元素
         {
            CurrentElement = targetElement; 
-        }
-        else if(CurrentElement >= Element.Rock)//已经是融合元素
-        {
-            Debug.Log("Current element has already been fused.");
         }
         else//融合
         {
