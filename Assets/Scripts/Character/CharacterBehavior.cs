@@ -84,6 +84,11 @@ public class CharacterBehavior : MonoBehaviour
         _faceDir = moveDir.normalized;
     }
 
+    public void ResetElement()
+    {
+        CurrentElement = Element.Wind;
+    }
+
     public void AbsorbElement(Element targetElement)
     {
         if (CurrentElement is Element.Wind or >= Element.Rock)//没有元素或是融合元素
