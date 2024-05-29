@@ -32,6 +32,7 @@ public class InteractableWitheredTree : MonoBehaviour, IInteract
             case Element.Ember:
                 if(interactor.CurrentElement == Element.Wind)
                 {
+                    
                     Debug.Log("Transform to high tree");
                     Debug.Log("Change the Icon");
                     interactor.ResetElement();

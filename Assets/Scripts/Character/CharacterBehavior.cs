@@ -31,6 +31,11 @@ public class CharacterBehavior : MonoBehaviour
         CheckInteractObj(colCenter);
         
         var moveDir = InputSystem.PlayerMoveInput;
+        if (moveDir != Vector2.zero)
+        {
+            _faceDir = moveDir.normalized;
+        }
+        
         if (moveDir != Vector2.zero && !_moving)
         {
             var checkCenter = new Vector2(position.x + moveDir.x - 0.5f, position.y + moveDir.y + 0.5f);
@@ -80,8 +85,6 @@ public class CharacterBehavior : MonoBehaviour
         _moving = true;
         var targetPos = transform.position + new Vector3(moveDir.x, moveDir.y) * moveDis;
         transform.DOMove(targetPos, 0.3f, false).SetEase(Ease.InOutExpo).onComplete += () => { _moving = false;};
-
-        _faceDir = moveDir.normalized;
     }
 
     public void ResetElement()
