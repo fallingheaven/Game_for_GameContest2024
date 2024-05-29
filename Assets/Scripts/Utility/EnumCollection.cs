@@ -4,7 +4,11 @@ namespace Utility
 {
     public enum Element
     {
-        Wind, Fire, Water, Soil, Wood
+        Wind, Fire, Water, Soil, Wood,
+        Rock,    // Fire + Soil
+        Ember,   // Fire + Wood
+        Steam,   // Fire + Water
+        Wetland  // Soil + Water
     }
 
     public enum ECommand
