@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 using Utility;
@@ -12,6 +13,7 @@ public class CharacterBehavior : MonoBehaviour
     private IInteract _interactObj;
     public Element CurrentElement { get; private set; }
     public LayerMask interactableMask;
+    public Vector3 offset;
     
     private bool _moving;
     private Vector2 _faceDir = Vector2.down;
@@ -27,7 +29,7 @@ public class CharacterBehavior : MonoBehaviour
     private void Update()
     {
         var position = transform.position;
-        var colCenter = new Vector2(position.x + _faceDir.x - 0.5f, position.y + _faceDir.y + 0.5f);
+        var colCenter = new Vector2(position.x + _faceDir.x + offset.x, position.y + _faceDir.y + offset.y);
         CheckInteractObj(colCenter);
         
         var moveDir = InputSystem.PlayerMoveInput;
@@ -38,8 +40,8 @@ public class CharacterBehavior : MonoBehaviour
         
         if (moveDir != Vector2.zero && !_moving)
         {
-            var checkCenter = new Vector2(position.x + moveDir.x - 0.5f, position.y + moveDir.y + 0.5f);
-            if (!CheckBoundary(checkCenter))
+            var checkCenter = new Vector2(position.x + moveDir.x + offset.x, position.y + moveDir.y + offset.y);
+            if (CheckBoundary(checkCenter))
             {
                 var moveCommand = _commandDictionary[ECommand.Move] as MoveCommand;
                 moveCommand?.Init(moveDir, Move);
@@ -73,8 +75,8 @@ public class CharacterBehavior : MonoBehaviour
 
     private bool CheckBoundary(Vector2 colCenter)
     {
-        var col = Physics2D.OverlapBox(colCenter, Vector2.one * 0.8f, 0, interactableMask);
-        return col;
+        var colliders = Physics2D.OverlapBoxAll(colCenter, Vector2.one * 0.8f, 0);
+        return colliders.Length == 0 || colliders.All(col => !col.transform.CompareTag("Darkness") && !col.transform.CompareTag("Boundary") && (interactableMask & (1 << col.gameObject.layer)) == 0);
     }
 
     private void Move(Vector2 moveDir)
@@ -121,7 +123,7 @@ public class CharacterBehavior : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        var colCenter = new Vector3(transform.position.x + _faceDir.x - 0.5f, transform.position.y + _faceDir.y + 0.5f, 0f);
+        var colCenter = new Vector3(transform.position.x + _faceDir.x + offset.x, transform.position.y + _faceDir.y + offset.y, 0f);
         Gizmos.DrawCube(colCenter, Vector3.one * 0.8f);
     }
 }
