@@ -878,7 +878,7 @@ MonoBehaviour:
   interactableMask:
     serializedVersion: 2
     m_Bits: 64
-  offset: {x: 0, y: 0, z: 0}
+  offset: {x: -0.5, y: 0.5, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1725,7 +1725,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentGameScene: {fileID: 11400000, guid: 697b00df5440a364b90976d9b5d2dee0, type: 2}
-  newGameScene: {fileID: 11400000, guid: 18179135ab0c5384989bd9b8f309a34b, type: 2}
+  newGameScene: {fileID: 11400000, guid: 7d404bfe20fc24c4b8b54d5c32aafad1, type: 2}
   gameSceneArray:
   - {fileID: 11400000, guid: 18179135ab0c5384989bd9b8f309a34b, type: 2}
   - {fileID: 11400000, guid: 93680fefccda5a848b89ae2335107027, type: 2}
