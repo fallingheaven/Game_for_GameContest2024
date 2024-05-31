@@ -6,6 +6,7 @@ TagManager:
   tags:
   - IInteract
   - Boundary
+  - Darkness
   layers:
   - Default
   - TransparentFX
