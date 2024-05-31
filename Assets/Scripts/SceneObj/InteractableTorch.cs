@@ -22,11 +22,12 @@ public class InteractableTorch : MonoBehaviour,IInteract
                 var sprite = col.transform.GetComponent<SpriteRenderer>();
                 sprite.DOColor(Color.clear, 0.5f).onComplete += () => {Destroy(sprite.gameObject);};
             }
+            interactor.ResetElement();
         }
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawSphere(transform.position + offset, lightRadius);
+        // Gizmos.DrawSphere(transform.position + offset, lightRadius);
     }
 }

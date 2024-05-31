@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,11 +7,26 @@ using Utility.Interface;
 
 public class InteractableWitheredTree : MonoBehaviour, IInteract
 {
+    public Sprite witheredTree;
+    public Sprite littleTree;
+    public Sprite bigTree;
+
+    private SpriteRenderer _sr;
+
+    private void Start()
+    {
+        _sr = GetComponent<SpriteRenderer>();
+        _sr.sprite = witheredTree;
+    }
+
+
     // use Element to represent the withered tree's current state
-    private Element nowElement = Element.Wood; // default element
+    public Element nowElement = Element.Wood; // default element
+    public Element getElement() { return nowElement; }
+
     public void Interact(CharacterBehavior interactor)
     {
-        switch (nowElement) 
+        switch (nowElement)
         {
             case Element.Wood:
                 if (interactor.CurrentElement == Element.Wetland)
@@ -18,7 +34,12 @@ public class InteractableWitheredTree : MonoBehaviour, IInteract
                     nowElement = interactor.CurrentElement;
                     Debug.Log("Transform to Wetland");
                     Debug.Log("Change the Icon");
+                    _sr.sprite = littleTree;
                     interactor.ResetElement();
+                }
+                else
+                {
+                    Debug.Log("The tree is withered, you need *WATER* and *SOIL* to make some changes");
                 }
                 break;
             case Element.Wetland:
@@ -28,13 +49,18 @@ public class InteractableWitheredTree : MonoBehaviour, IInteract
                     Debug.Log("Transform to Ember");
                     interactor.ResetElement();
                 }
+                else
+                {
+                    Debug.Log("Now you need *FIRE* and *WOOD* to accelerate the growth of the tree");
+                }
                 break;
             case Element.Ember:
                 if(interactor.CurrentElement == Element.Wind)
                 {
-                    
+                    nowElement = interactor.CurrentElement;
                     Debug.Log("Transform to high tree");
                     Debug.Log("Change the Icon");
+                    _sr.sprite = bigTree;
                     interactor.ResetElement();
                 }
                 break;
