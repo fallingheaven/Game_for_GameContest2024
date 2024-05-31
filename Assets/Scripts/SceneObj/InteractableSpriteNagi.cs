@@ -4,12 +4,11 @@ using UnityEngine;
 using Utility;
 using Utility.Interface;
 
-public class InteractableMoss : MonoBehaviour, IInteract
+public class InteractableSpriteNagi : MonoBehaviour, IInteract
 {
     public void Interact(CharacterBehavior interactor)
     {
-        Debug.Log("absorbed wood element");
-        interactor.AbsorbElement(Element.Wood);
-        Debug.Log("Moss disappeared");
+        interactor.ResetElement();
+        Debug.Log("You've got the permanent Wind element!");
     }
 }

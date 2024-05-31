@@ -80,5 +80,9 @@ public class SavePanelManager : Singleton<SavePanelManager>
         }
 
     #endregion
-    
+
+    public void StartNewGame()
+    {
+        GameManager.Instance.StartNewGame();
+    }
 }
