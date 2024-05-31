@@ -17,6 +17,7 @@ public class CharacterBehavior : MonoBehaviour
     
     private bool _moving;
     private Vector2 _faceDir = Vector2.down;
+    public Vector2 FaceDir => _faceDir;
 
     private readonly Dictionary<ECommand, ICommand> _commandDictionary = new();
     
