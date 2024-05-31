@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level_01
   m_EditorClassIdentifier: 
   targetScene:
-    m_AssetGUID: 6b246922007f70346a78de660f703460
+    m_AssetGUID: 7e6862fd160ff974b87347dfea4b59d9
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0

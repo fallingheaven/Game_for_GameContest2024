@@ -6,6 +6,7 @@ using Utility.Interface;
 
 public class InteractableLadder : MonoBehaviour, IInteract
 {
+    
     private bool _Fixed = false; // _Fixed = false
     public void Interact(CharacterBehavior interactor)
     {
