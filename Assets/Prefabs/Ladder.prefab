@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -998371359, guid: 61f8a7a0d3e365a4ab208fe3da349544, type: 3}
+  m_Sprite: {fileID: 1506568000, guid: 61f8a7a0d3e365a4ab208fe3da349544, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -143,3 +143,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 463e9040d137d954f910f53672cba0fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  brokenLadder: {fileID: 1506568000, guid: 61f8a7a0d3e365a4ab208fe3da349544, type: 3}
+  brandLadder: {fileID: -998371359, guid: 61f8a7a0d3e365a4ab208fe3da349544, type: 3}

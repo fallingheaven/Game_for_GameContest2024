@@ -11,10 +11,9 @@ GameObject:
   - component: {fileID: 2292931703037460535}
   - component: {fileID: 3633573732794008402}
   - component: {fileID: 6151080264557360387}
-  - component: {fileID: 4612847498080569828}
   m_Layer: 6
-  m_Name: Bridge
-  m_TagString: Untagged
+  m_Name: Darkness
+  m_TagString: Darkness
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,11 +27,11 @@ Transform:
   m_GameObject: {fileID: 7715679741343544927}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.871, y: 3.569, z: 0}
-  m_LocalScale: {x: 1, y: 1.6, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: -2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3633573732794008402
 SpriteRenderer:
@@ -74,8 +73,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
-  m_Sprite: {fileID: -1358145908, guid: 3f0343f476465774aba0a41224fc3657, type: 3}
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -118,30 +117,16 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00000047683716, y: 0.0060278177}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.9375, y: 2.0625}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.9644003, y: 2.0970023}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &4612847498080569828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7715679741343544927}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fa6a6c171eb9a14fabf86ed6248729f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  brokenBridge: {fileID: -1358145908, guid: 3f0343f476465774aba0a41224fc3657, type: 3}
-  brandBridge: {fileID: -754996103, guid: 3f0343f476465774aba0a41224fc3657, type: 3}
