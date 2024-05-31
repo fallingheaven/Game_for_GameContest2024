@@ -8,11 +8,11 @@ public class InteractableMoss : MonoBehaviour, IInteract
 {
     public void Interact(CharacterBehavior interactor)
     {
-        Debug.Log("absorbed wood element");
+        // Debug.Log("absorbed wood element");
         if (interactor.AbsorbElement(Element.Wood))
         {
-            //Destroy(this.gameObject);
-            Debug.Log("Moss disappeared");
+            Destroy(gameObject);
+            // Debug.Log("Moss disappeared");
         }
     }
 }

@@ -21,7 +21,7 @@ public class InteractableBridge : MonoBehaviour, IInteract
         else
         {
             _sr.sprite = brokenBridge;
-            _col.enabled = false;
+            // _col.enabled = false;
         }
     }
 
@@ -35,6 +35,7 @@ public class InteractableBridge : MonoBehaviour, IInteract
                 _Fixed = true;
                 _sr.sprite = brandBridge;
                 _col.enabled = false;
+                interactor.ResetElement();
             }
             else
             {

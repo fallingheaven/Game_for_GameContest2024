@@ -11,6 +11,6 @@ public class InteractableRubble : MonoBehaviour, IInteract
         Debug.Log("absorbed soil element");
         interactor.AbsorbElement(Element.Soil);
         Debug.Log("Rubble disappeared");
-        GameObject.Destroy(this);
+        Destroy(gameObject);
     }
 }
