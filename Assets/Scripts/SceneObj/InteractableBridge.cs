@@ -6,24 +6,24 @@ using Utility.Interface;
 
 public class InteractableBridge : MonoBehaviour, IInteract
 {
-    private bool _Fixed = false; // _Fixed = false 表示桥梁损坏
+    private bool _Fixed = false; // _Fixed = false
     public void Interact(CharacterBehavior interactor)
     {
-        if (_Fixed == false) // 如果桥梁损坏
+        if (_Fixed == false)
         {
             if (interactor.CurrentElement == Element.Soil)
             {
-                Debug.Log("修复桥梁");
+                Debug.Log("fixed the bridge successfully");
                 _Fixed = true;
             }
             else
             {
-                Debug.Log("桥梁损坏，需要 *土* 元素来修复");
+                Debug.Log("maybe you need *SOIL* element to fix the bridge");
             }
         }
-        else // 桥梁已修复
+        else 
         {
-            Debug.Log("可通过桥梁");
+            Debug.Log("pass the bridge");
         }
     }
 }

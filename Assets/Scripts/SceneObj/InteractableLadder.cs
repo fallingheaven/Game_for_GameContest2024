@@ -6,24 +6,24 @@ using Utility.Interface;
 
 public class InteractableLadder : MonoBehaviour, IInteract
 {
-    private bool _Fixed = false; // _Fixed = false 表示梯子损坏
+    private bool _Fixed = false; // _Fixed = false
     public void Interact(CharacterBehavior interactor)
     {
-        if (_Fixed == false) // 如果梯子损坏
+        if (_Fixed == false)
         {
             if (interactor.CurrentElement == Element.Wood)
             {
-                Debug.Log("修复梯子");
+                Debug.Log("fixed the ladder successfully");
                 _Fixed = true;
             }
             else
             {
-                Debug.Log("梯子已损坏，需要 *木* 元素来修复");
+                Debug.Log("maybe you need *WOOD* element to fix the ladder");
             }
         }
-        else // 梯子完整则进入下个关卡
+        else 
         {
-            Debug.Log("进入下一关");
+            Debug.Log("go to the next level");
         }
     }
 }

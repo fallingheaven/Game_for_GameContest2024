@@ -1729,6 +1729,7 @@ MonoBehaviour:
   gameSceneArray:
   - {fileID: 11400000, guid: 18179135ab0c5384989bd9b8f309a34b, type: 2}
   - {fileID: 11400000, guid: 93680fefccda5a848b89ae2335107027, type: 2}
+  - {fileID: 11400000, guid: 7d404bfe20fc24c4b8b54d5c32aafad1, type: 2}
   playerCharacter: {fileID: 328007509}
   virtualCamera: {fileID: 1061918951}
 --- !u!4 &1787786685

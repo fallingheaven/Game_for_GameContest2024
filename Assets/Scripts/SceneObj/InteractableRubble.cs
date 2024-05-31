@@ -8,8 +8,8 @@ public class InteractableRubble : MonoBehaviour, IInteract
 {
     public void Interact(CharacterBehavior interactor)
     {
-        Debug.Log("吸收土元素");
+        Debug.Log("absorbed soil element");
         interactor.AbsorbElement(Element.Soil);
-        Debug.Log("碎石堆消失");
+        Debug.Log("Rubble disappeared");
     }
 }
