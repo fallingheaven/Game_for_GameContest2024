@@ -38,7 +38,7 @@ public class InteractableLadder : MonoBehaviour, IInteract
         }
         else 
         {
-            Debug.Log("go to the next level");
+            LevelManager.Instance.ToNextLevel();
         }
     }
 }
