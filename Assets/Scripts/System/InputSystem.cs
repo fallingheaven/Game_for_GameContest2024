@@ -19,4 +19,9 @@ public static class InputSystem
     /// 获取玩家交互输入
     /// </summary>
     public static bool Interact => Input.GetKeyDown(KeyCode.E);
+
+    /// <summary>
+    /// 丢弃元素
+    /// </summary>
+    public static bool Release => Input.GetKeyDown(KeyCode.R);
 }
