@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8dbaad0e84a2784bba9bdcf4d01596c, type: 3}
-  m_Name: Level_01
+  m_Name: Level_03
   m_EditorClassIdentifier: 
   targetScene:
-    m_AssetGUID: 6b246922007f70346a78de660f703460
+    m_AssetGUID: 67efe10bb55293b4f9f12a70e58759e5
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   existPlayer: 1
   initPosition: {x: 0, y: -5, z: 0}
-  nextScene: {fileID: 11400000, guid: 93680fefccda5a848b89ae2335107027, type: 2}
-  lastScene: {fileID: 11400000, guid: 697b00df5440a364b90976d9b5d2dee0, type: 2}
+  nextScene: {fileID: 0}
+  lastScene: {fileID: 11400000, guid: 93680fefccda5a848b89ae2335107027, type: 2}
   type: 0

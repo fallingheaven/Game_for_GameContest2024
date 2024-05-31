@@ -74,7 +74,7 @@ public class CharacterBehavior : MonoBehaviour
         }
     }
 
-    private bool CheckBoundary(Vector2 colCenter)
+    public bool CheckBoundary(Vector2 colCenter)
     {
         var colliders = Physics2D.OverlapBoxAll(colCenter, Vector2.one * 0.8f, 0);
         return colliders.Length == 0 || colliders.All(col => !col.transform.CompareTag("Darkness") && !col.transform.CompareTag("Boundary") && (interactableMask & (1 << col.gameObject.layer)) == 0);
