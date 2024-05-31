@@ -11,7 +11,7 @@ public class InteractableMoss : MonoBehaviour, IInteract
         Debug.Log("absorbed wood element");
         if (interactor.AbsorbElement(Element.Wood))
         {
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
             Debug.Log("Moss disappeared");
         }
     }

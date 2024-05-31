@@ -8,9 +8,11 @@ public class InteractableWitheredTree : MonoBehaviour, IInteract
 {
     // use Element to represent the withered tree's current state
     private Element nowElement = Element.Wood; // default element
+    public Element getElement() { return nowElement; }
+
     public void Interact(CharacterBehavior interactor)
     {
-        switch (nowElement) 
+        switch (nowElement)
         {
             case Element.Wood:
                 if (interactor.CurrentElement == Element.Wetland)
@@ -20,6 +22,10 @@ public class InteractableWitheredTree : MonoBehaviour, IInteract
                     Debug.Log("Change the Icon");
                     interactor.ResetElement();
                 }
+                else
+                {
+                    Debug.Log("The tree is withered, you need *WATER* and *SOIL* to make some changes");
+                }
                 break;
             case Element.Wetland:
                 if(interactor.CurrentElement == Element.Ember)
@@ -28,11 +34,15 @@ public class InteractableWitheredTree : MonoBehaviour, IInteract
                     Debug.Log("Transform to Ember");
                     interactor.ResetElement();
                 }
+                else
+                {
+                    Debug.Log("Now you need *FIRE* and *WOOD* to accelerate the growth of the tree");
+                }
                 break;
             case Element.Ember:
                 if(interactor.CurrentElement == Element.Wind)
                 {
-                    
+                    nowElement = interactor.CurrentElement;
                     Debug.Log("Transform to high tree");
                     Debug.Log("Change the Icon");
                     interactor.ResetElement();
