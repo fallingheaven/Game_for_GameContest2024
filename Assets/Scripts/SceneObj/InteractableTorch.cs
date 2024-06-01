@@ -24,6 +24,10 @@ public class InteractableTorch : MonoBehaviour,IInteract
             }
             interactor.ResetElement();
         }
+        else
+        {
+            Debug.Log("或许需要 *火* 元素点燃火把。");
+        }
     }
 
     private void OnDrawGizmos()
