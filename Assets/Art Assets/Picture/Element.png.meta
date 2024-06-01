@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 38ca3f9e8b7b33b499de235428233d30
+guid: 0b127aac7a915074bb9cab1830aa721a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 128
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -110,13 +110,34 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Outside_B_0
+      name: Wind
       rect:
         serializedVersion: 2
-        x: 64
-        y: 159
-        width: 32
-        height: 32
+        x: 575
+        y: 54
+        width: 207
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 1}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e0a050283c778145a586e9f8a43abc9
+      internalID: -572837871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire
+      rect:
+        serializedVersion: 2
+        x: 813
+        y: 56
+        width: 207
+        height: 512
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,29 +145,113 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 74010a80db36dc049b7a3c822ec40573
-      internalID: -371029367
+      spriteID: 893a4a8b57309d740a2421126de4c3bf
+      internalID: -1423389
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WitheredTree
+      name: Water
       rect:
         serializedVersion: 2
-        x: 256
-        y: 288
-        width: 32
-        height: 62
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 339
+        y: 57
+        width: 207
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 035fe79174bac4b4a9a9a2252c3efd96
-      internalID: 19535071
+      spriteID: 9a2713edfa9925b4690390172c584db1
+      internalID: 893224790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Soil
+      rect:
+        serializedVersion: 2
+        x: 1050
+        y: 55
+        width: 207
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd0cbc15d114cbb4880e1e9d85e515ec
+      internalID: 1094223401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wood
+      rect:
+        serializedVersion: 2
+        x: 1284
+        y: 56
+        width: 207
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84c049af8519ed34090301be6f674cdc
+      internalID: -970161962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wind1
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 357
+        width: 207
+        height: 208
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 328442a608d7b7c4baa6919daf79cc70
+      internalID: 1056026762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wind2
+      rect:
+        serializedVersion: 2
+        x: 574
+        y: 53
+        width: 207
+        height: 304
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 863ce11c503789b488dbddcb6f70b084
+      internalID: 94563355
       vertices: []
       indices: 
       edges: []
@@ -162,8 +267,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Outside_B_0: -371029367
-      WitheredTree: 19535071
+      Fire: -1423389
+      Soil: 1094223401
+      Water: 893224790
+      Wind: -572837871
+      Wind1: 1056026762
+      Wind2: 94563355
+      Wood: -970161962
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

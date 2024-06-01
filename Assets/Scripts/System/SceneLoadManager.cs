@@ -82,6 +82,7 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
 
         if (sceneAsset.existPlayer)
         {
+            
             GameManager.Instance.playerCharacter.transform.position = sceneAsset.initPosition;
             GameManager.Instance.playerCharacter.SetActive(true);
         }
