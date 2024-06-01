@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class Transformable : TalkInteractable
 {
-    private bool isCleaned;
+    public string s1;
+    public string s2;
+    private bool boolean;
 
     protected override void Start()
     {
@@ -10,35 +12,44 @@ public class Transformable : TalkInteractable
         UpdatePromptText();
     }
 
-    protected override void Update()
+    //protected override void Update()
+    //{
+    //    base.Update();
+    //    if (isEntered && Input.GetKeyDown(KeyCode.E))
+    //    {
+    //        if (isCleaned)
+    //        {
+    //            // 变成可对话的状态
+    //            DialogueManager.instance.ShowDialogue(new string[] { "The cleaned object is now talkable." });
+    //            interactionPrompt.SetActive(false);
+    //        }
+    //        else
+    //        {
+    //            // 执行清洗操作
+    //            isCleaned = true;
+    //            UpdatePromptText();
+    //        }
+    //    }
+    //}
+    public override void ShowPrompt()
     {
-        base.Update();
-        if (isEntered && Input.GetKeyDown(KeyCode.E))
-        {
-            if (isCleaned)
-            {
-                // 变成可对话的状态
-                DialogueManager.instance.ShowDialogue(new string[] { "The cleaned object is now talkable." });
-                interactionPrompt.SetActive(false);
-            }
-            else
-            {
-                // 执行清洗操作
-                isCleaned = true;
-                UpdatePromptText();
-            }
-        }
+        UpdatePromptText();
+        interactionPrompt.SetActive(true);
     }
-
-    private void UpdatePromptText()
+    public void UpdatePromptText()
     {
-        if (isCleaned)
+        if (!boolean)
         {
-            promptText.text = $"{gameObject.name} is now clean and talkable.";
+            promptText.text = s1;
         }
         else
         {
-            promptText.text = $"{gameObject.name} is covered in dust.";
+            promptText.text = s2;
         }
+    }
+    public void SetState(bool b)
+    {
+        boolean = b;
+        UpdatePromptText();
     }
 }
