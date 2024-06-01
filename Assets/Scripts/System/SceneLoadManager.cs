@@ -49,7 +49,8 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
             LevelManager.Instance.currentLevel = sceneAsset;
         }
         
-        UnloadScene(GameManager.Instance.currentGameScene);
+        if (GameManager.Instance.currentGameScene != sceneAsset)
+            UnloadScene(GameManager.Instance.currentGameScene);
         
         if (_isLoaded.ContainsKey(sceneAsset.targetScene))
         {
