@@ -29,6 +29,7 @@ public class InteractableLadder : MonoBehaviour, IInteract
             {
                 Debug.Log("fixed the ladder successfully");
                 _Fixed = true;
+                interactor.ResetElement();
                 _sr.sprite = brandLadder;
             }
             else
