@@ -56,6 +56,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3633573732794008402, guid: f211cbf061026624b996f30754077ddc, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 7715679741343544927, guid: f211cbf061026624b996f30754077ddc, type: 3}
       propertyPath: m_Name
       value: ReadableStone Variant
