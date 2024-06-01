@@ -50,12 +50,18 @@ public class CharacterBehavior : MonoBehaviour
                 InputManager.Instance.AddCommand(new MoveCommand(moveDir, Move));
             }
         }
+        
         if (InputSystem.Interact && _interactObj != null)
         {
             var interactCommand = _commandDictionary[ECommand.Interact] as InteractCommand;
             interactCommand?.Init(_interactObj, this);
 
             InputManager.Instance.AddCommand(interactCommand);
+        }
+
+        if (InputSystem.Release)
+        {
+            ResetElement();
         }
         
     }
@@ -95,11 +101,13 @@ public class CharacterBehavior : MonoBehaviour
         CurrentElement = Element.Wind;
     }
 
-    public void AbsorbElement(Element targetElement)
+    public bool AbsorbElement(Element targetElement)
     {
         if (CurrentElement is Element.Wind or >= Element.Rock)//没有元素或是融合元素
         {
-           CurrentElement = targetElement; 
+           CurrentElement = targetElement;
+           Debug.Log(CurrentElement);
+           return true;
         }
         else//融合
         {
@@ -107,10 +115,13 @@ public class CharacterBehavior : MonoBehaviour
             if (Fusion.FusionMap[CurrentElement].TryGetValue(targetElement, out fusionResult))
             {
                 CurrentElement = fusionResult;
+                Debug.Log(CurrentElement);
+                return true;
             }
             else//没有相应的融合
             {
                 Debug.Log("No fusion.");
+                return false;
             }
         }
 

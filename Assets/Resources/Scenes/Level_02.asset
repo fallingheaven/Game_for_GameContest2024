@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Level_02
   m_EditorClassIdentifier: 
   targetScene:
-    m_AssetGUID: 795f24815d588dc498ad08335b39ab77
+    m_AssetGUID: 3ae126d7dd8f4ef4cbb699317d4822bb
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   existPlayer: 1
-  initPosition: {x: 0, y: -5, z: 0}
+  initPosition: {x: 15, y: -42, z: 0}
   nextScene: {fileID: 11400000, guid: 7d404bfe20fc24c4b8b54d5c32aafad1, type: 2}
   lastScene: {fileID: 11400000, guid: 18179135ab0c5384989bd9b8f309a34b, type: 2}
   type: 0

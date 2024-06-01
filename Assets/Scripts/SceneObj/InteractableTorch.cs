@@ -22,11 +22,16 @@ public class InteractableTorch : MonoBehaviour,IInteract
                 var sprite = col.transform.GetComponent<SpriteRenderer>();
                 sprite.DOColor(Color.clear, 0.5f).onComplete += () => {Destroy(sprite.gameObject);};
             }
+            interactor.ResetElement();
+        }
+        else
+        {
+            Debug.Log("或许需要 *火* 元素点燃火把。");
         }
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawSphere(transform.position + offset, lightRadius);
+        // Gizmos.DrawSphere(transform.position + offset, lightRadius);
     }
 }
