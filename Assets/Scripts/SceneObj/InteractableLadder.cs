@@ -6,6 +6,9 @@ using Utility.Interface;
 
 public class InteractableLadder : MonoBehaviour, IInteract
 {
+    public string[] strings1;
+    public Transformable transformable;
+
     public Sprite brokenLadder;
     public Sprite brandLadder;
     private SpriteRenderer _sr;
@@ -29,17 +32,21 @@ public class InteractableLadder : MonoBehaviour, IInteract
             {
                 Debug.Log("fixed the ladder successfully");
                 _Fixed = true;
+                transformable.SetState(_Fixed);
                 interactor.ResetElement();
                 _sr.sprite = brandLadder;
             }
             else
             {
+                DialogueManager.instance.ShowDialogue(strings1);
                 Debug.Log("maybe you need *WOOD* element to fix the ladder");
+                transformable.SetState(_Fixed);
             }
         }
         else 
         {
             LevelManager.Instance.ToNextLevel();
+            
         }
     }
 }

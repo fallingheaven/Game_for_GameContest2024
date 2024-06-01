@@ -51,7 +51,7 @@ public class DialogueManager : MonoBehaviour
                 else
                 {
                     dialogueBox.SetActive(false);
-                    FindObjectOfType<PlayerMovement>().canMove = true;
+                  
                 }
             }
         }
@@ -62,7 +62,6 @@ public class DialogueManager : MonoBehaviour
         currentLine = 0;
         dialogueText.text = dialogueLines[currentLine];
         dialogueBox.SetActive(true);
-        FindObjectOfType<PlayerMovement>().canMove = false;
-
+        //FindObjectOfType<PlayerMovement>().canMove = false;
     }
 }

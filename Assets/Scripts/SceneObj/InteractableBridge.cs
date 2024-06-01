@@ -7,6 +7,11 @@ using Utility.Interface;
 
 public class InteractableBridge : MonoBehaviour, IInteract
 {
+
+    public string[] strings1;
+    
+    public Transformable transformable;
+
     public Sprite brokenBridge;
     public Sprite brandBridge;
     private SpriteRenderer _sr;
@@ -33,18 +38,23 @@ public class InteractableBridge : MonoBehaviour, IInteract
             {
                 Debug.Log("fixed the bridge successfully");
                 _Fixed = true;
+                transformable.SetState(_Fixed);
                 _sr.sprite = brandBridge;
                 _col.enabled = false;
                 interactor.ResetElement();
             }
             else
             {
+                DialogueManager.instance.ShowDialogue(strings1);
                 Debug.Log("maybe you need *SOIL* element to fix the bridge");
+                transformable.SetState(_Fixed);
             }
         }
         else 
         {
             Debug.Log("pass the bridge");
+            transformable.ShowPrompt();
+            
         }
     }
 }

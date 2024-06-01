@@ -716,7 +716,7 @@ GameObject:
   - component: {fileID: 328007515}
   m_Layer: 0
   m_Name: Ws_Cat
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -904,7 +904,7 @@ GameObject:
   - component: {fileID: 433689761}
   - component: {fileID: 433689760}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: DialogueText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2301,7 +2301,7 @@ GameObject:
   - component: {fileID: 1581812016}
   - component: {fileID: 1581812017}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: DialogueBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2498,7 +2498,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1726210673}
-  - component: {fileID: 1726210672}
+  - component: {fileID: 1726210674}
   m_Layer: 0
   m_Name: DialogueManger
   m_TagString: Untagged
@@ -2506,18 +2506,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1726210672
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1726210671}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 668d132128497fa4ca39b7bc7d06d9d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1726210673
 Transform:
   m_ObjectHideFlags: 0
@@ -2533,6 +2521,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1726210674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726210671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59e633d0b5ce50b47933c3a8b43e5e25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueBox: {fileID: 1581812015}
+  dialogueText: {fileID: 433689760}
+  nameText: {fileID: 1719328954}
+  dialogueLines: []
+  currentLine: 0
 --- !u!1 &1749837635
 GameObject:
   m_ObjectHideFlags: 0

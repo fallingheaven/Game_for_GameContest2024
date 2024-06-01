@@ -30,6 +30,7 @@ public class InteractableBox : MonoBehaviour,IInteract
             {
                 _sr.sprite = box2;
                 _col.enabled = false;
+                Destroy(transform.GetChild(0).gameObject);
             }
         }
     }

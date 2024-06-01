@@ -38,7 +38,7 @@ public abstract class TalkInteractable : MonoBehaviour
         // 基类中的Update逻辑
     }
 
-    protected virtual void ShowPrompt()
+    public virtual void ShowPrompt()
     {
         promptText.text = gameObject.name;  // 设置提示框文本为物体名称
         interactionPrompt.SetActive(true);

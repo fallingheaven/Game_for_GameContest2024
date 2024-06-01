@@ -1,3 +1,4 @@
+using Event;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -57,11 +58,7 @@ public class InteractableWitheredTree : MonoBehaviour, IInteract
             case Element.Ember:
                 if(interactor.CurrentElement == Element.Wind)
                 {
-                    nowElement = interactor.CurrentElement;
-                    Debug.Log("Transform to high tree");
-                    Debug.Log("Change the Icon");
-                    _sr.sprite = bigTree;
-                    interactor.ResetElement();
+                    StartCoroutine(GetBig(interactor));
                 }
                 break;
             default:
@@ -70,5 +67,21 @@ public class InteractableWitheredTree : MonoBehaviour, IInteract
         }
 
         
+    }
+
+    private IEnumerator GetBig(CharacterBehavior interactor)
+    {
+        var message1 = new OnFadeIn();
+        EventManager.Instance.InvokeEvent(message1);
+
+        yield return new WaitForSeconds(0.55f);
+        nowElement = interactor.CurrentElement;
+        Debug.Log("Transform to high tree");
+        Debug.Log("Change the Icon");
+        _sr.sprite = bigTree;
+        interactor.ResetElement();
+
+        var message2 = new OnFadeOut();
+        EventManager.Instance.InvokeEvent(message2);
     }
 }
