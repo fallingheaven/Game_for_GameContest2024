@@ -4,9 +4,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogueManger : MonoBehaviour
+public class DialogueManager : MonoBehaviour
 {
-    public static DialogueManger instance;
+    public static DialogueManager instance;
 
     public GameObject dialogueBox;
     public Text dialogueText, nameText;

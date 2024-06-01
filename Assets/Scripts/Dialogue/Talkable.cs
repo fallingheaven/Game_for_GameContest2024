@@ -34,9 +34,9 @@ public class Talkable : MonoBehaviour
 
     private void Update()
     {
-        if (isEntered && Input.GetKeyDown(KeyCode.E) && !DialogueManger.instance.dialogueBox.activeInHierarchy)
+        if (isEntered && Input.GetKeyDown(KeyCode.E) && !DialogueManager.instance.dialogueBox.activeInHierarchy)
         {
-            DialogueManger.instance.ShowDialogue(lines);
+            DialogueManager.instance.ShowDialogue(lines);
             interactionPrompt.SetActive(false); // 隐藏提示框当对话开始时
         }
        
