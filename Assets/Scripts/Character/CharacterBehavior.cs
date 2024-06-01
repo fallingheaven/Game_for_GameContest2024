@@ -20,11 +20,14 @@ public class CharacterBehavior : MonoBehaviour
     public Vector2 FaceDir => _faceDir;
 
     private readonly Dictionary<ECommand, ICommand> _commandDictionary = new();
+
+    private ElementUI _elementUI;
     
     private void Start()
     {
         _commandDictionary[ECommand.Move] = new MoveCommand(Vector2.zero, null);
         _commandDictionary[ECommand.Interact] = new InteractCommand(null, this);
+        _elementUI = GetComponent<ElementUI>();
     }
 
     private void Update()
@@ -106,6 +109,7 @@ public class CharacterBehavior : MonoBehaviour
         if (CurrentElement is Element.Wind or >= Element.Rock)//没有元素或是融合元素
         {
            CurrentElement = targetElement;
+            _elementUI.UpdateElementBallColor();
            Debug.Log(CurrentElement);
            return true;
         }
@@ -115,6 +119,7 @@ public class CharacterBehavior : MonoBehaviour
             if (Fusion.FusionMap[CurrentElement].TryGetValue(targetElement, out fusionResult))
             {
                 CurrentElement = fusionResult;
+                _elementUI.UpdateElementBallColor();
                 Debug.Log(CurrentElement);
                 return true;
             }
@@ -125,7 +130,7 @@ public class CharacterBehavior : MonoBehaviour
             }
         }
 
-        Debug.Log(CurrentElement);
+        //Debug.Log(CurrentElement);
     }
 
     public void Die()
