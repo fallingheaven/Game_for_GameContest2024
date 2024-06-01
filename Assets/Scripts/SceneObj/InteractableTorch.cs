@@ -10,6 +10,17 @@ public class InteractableTorch : MonoBehaviour,IInteract
     public float lightRadius;
     public Vector3 offset;
         
+    public Sprite torch1;
+    public Sprite torch2;
+    private SpriteRenderer _sr;
+    
+    private void Start()
+    {
+        _sr = GetComponent<SpriteRenderer>();
+        _sr.sprite = torch1;
+    }
+    
+    
     public void Interact(CharacterBehavior interactor)
     {
         if (interactor.CurrentElement == Element.Fire)
@@ -23,6 +34,11 @@ public class InteractableTorch : MonoBehaviour,IInteract
                 sprite.DOColor(Color.clear, 0.5f).onComplete += () => {Destroy(sprite.gameObject);};
             }
             interactor.ResetElement();
+            _sr.sprite = torch2;
+        }
+        else
+        {
+            Debug.Log("或许需要 *火* 元素点燃火把。");
         }
     }
 
