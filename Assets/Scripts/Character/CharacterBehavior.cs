@@ -102,6 +102,7 @@ public class CharacterBehavior : MonoBehaviour
     public void ResetElement()
     {
         CurrentElement = Element.Wind;
+        _elementUI.UpdateElementBallColor();
     }
 
     public bool AbsorbElement(Element targetElement)

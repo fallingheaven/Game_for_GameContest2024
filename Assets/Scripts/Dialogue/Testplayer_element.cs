@@ -52,6 +52,7 @@ public class ElementUI : MonoBehaviour
         //AddElement(Element.Wind);
         //Debug.Log("现在有" + elements.Count + "个元素");
         _character = GetComponent<CharacterBehavior>();
+        UpdateElementBallColor();
     }
 
     private void Update()
