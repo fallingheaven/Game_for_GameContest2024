@@ -16,6 +16,9 @@ public class GameManager : Singleton<GameManager>
     private SaveLoadManager _saveLoadManager;
     private SceneLoadManager _sceneLoadManager;
     private EventManager _eventManager;
+    private AudioManager _audioManager;
+    
+    public AudioPlayEvent bgm;
 
     private void Awake()
     {
@@ -23,6 +26,7 @@ public class GameManager : Singleton<GameManager>
         _saveLoadManager = SaveLoadManager.Instance;
         _sceneLoadManager = SceneLoadManager.Instance;
         _eventManager = EventManager.Instance;
+        _audioManager = AudioManager.Instance;
         gameObject.AddComponent<UnityMainThreadDispatcher>();
     }
 

@@ -28,7 +28,15 @@ public class CharacterBehavior : MonoBehaviour
     public Sprite moveLeft;
     public Sprite moveRight;
     private SpriteRenderer _sr;
-    
+
+    public AudioPlayEvent moveClip;
+
+    public Dictionary<Element, int> elementAudioDictionary = new Dictionary<Element, int>()
+    {
+        { Element.Wind , 0}, { Element.Fire, 1}, { Element.Water, 2 }, { Element.Soil, 3 }, { Element.Wood, 4 },
+        { Element.Rock, 5 }, { Element.Ember, 6 }, { Element.Steam, 7 }, { Element.Wetland, 8 }
+    };
+    public AudioPlayEvent[] fxAudio;
     
     private void Start()
     {
@@ -61,6 +69,9 @@ public class CharacterBehavior : MonoBehaviour
                 InputManager.Instance.AddCommand(new MoveCommand(moveDir, Move));
             }
         }
+        
+        if (InputSystem.Interact)
+            EventManager.Instance.InvokeEvent(fxAudio[elementAudioDictionary[CurrentElement]]);
         
         if (InputSystem.Interact && _interactObj != null)
         {
@@ -124,6 +135,8 @@ public class CharacterBehavior : MonoBehaviour
         _moving = true;
         var targetPos = transform.position + new Vector3(moveDir.x, moveDir.y) * moveDis;
         transform.DOMove(targetPos, 0.3f, false).SetEase(Ease.InOutExpo).onComplete += () => { _moving = false;};
+
+        EventManager.Instance.InvokeEvent(moveClip);
     }
 
     public void ResetElement()
