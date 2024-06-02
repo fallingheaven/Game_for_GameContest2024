@@ -22,12 +22,20 @@ public class CharacterBehavior : MonoBehaviour
     private readonly Dictionary<ECommand, ICommand> _commandDictionary = new();
 
     private ElementUI _elementUI;
+
+    public Sprite moveUp;
+    public Sprite moveDown;
+    public Sprite moveLeft;
+    public Sprite moveRight;
+    private SpriteRenderer _sr;
+    
     
     private void Start()
     {
         _commandDictionary[ECommand.Move] = new MoveCommand(Vector2.zero, null);
         _commandDictionary[ECommand.Interact] = new InteractCommand(null, this);
         _elementUI = GetComponent<ElementUI>();
+        _sr = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -66,7 +74,26 @@ public class CharacterBehavior : MonoBehaviour
         {
             ResetElement();
         }
-        
+
+        if (moveDir.y >= 1f)
+        {
+            _sr.sprite = moveUp;
+        }
+        else if (moveDir.y <= -1f)
+        {
+            _sr.sprite = moveDown;
+        }
+        else
+        {
+            if (moveDir.x >= 1f)
+            {
+                _sr.sprite = moveRight;
+            }
+            else if (moveDir.x <= -1f)
+            {
+                _sr.sprite = moveLeft;
+            }
+        }
     }
 
     private void CheckInteractObj(Vector2 colCenter)

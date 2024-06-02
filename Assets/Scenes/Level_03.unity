@@ -9273,6 +9273,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   offset: {x: 0, y: 0, z: 0}
+  moveUp: {fileID: 0}
+  moveDown: {fileID: 0}
+  moveLeft: {fileID: 0}
+  moveRight: {fileID: 0}
 --- !u!61 &1418812955
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9999,6 +10003,18 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1160211932870508200, guid: b0464a1431a36b345971a0019b597926, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1160211932870508200, guid: b0464a1431a36b345971a0019b597926, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1160211932870508200, guid: b0464a1431a36b345971a0019b597926, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1160211932870508200, guid: b0464a1431a36b345971a0019b597926, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.02
       objectReference: {fileID: 0}
@@ -10038,6 +10054,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2222269499553170319, guid: b0464a1431a36b345971a0019b597926, type: 3}
+      propertyPath: m_Size.x
+      value: 1.7615772
+      objectReference: {fileID: 0}
+    - target: {fileID: 2222269499553170319, guid: b0464a1431a36b345971a0019b597926, type: 3}
+      propertyPath: m_Size.y
+      value: 1.8548262
+      objectReference: {fileID: 0}
+    - target: {fileID: 2222269499553170319, guid: b0464a1431a36b345971a0019b597926, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.031143367
+      objectReference: {fileID: 0}
+    - target: {fileID: 2222269499553170319, guid: b0464a1431a36b345971a0019b597926, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.056586385
+      objectReference: {fileID: 0}
+    - target: {fileID: 4442462011964358093, guid: b0464a1431a36b345971a0019b597926, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1584546716, guid: 3ca5cb0543bfefd4d971e6104439b443, type: 3}
     - target: {fileID: 6433371424316852876, guid: b0464a1431a36b345971a0019b597926, type: 3}
       propertyPath: s1
       value: "\u77F3\u677F"
