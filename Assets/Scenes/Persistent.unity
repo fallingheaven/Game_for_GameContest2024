@@ -885,6 +885,28 @@ MonoBehaviour:
   moveDown: {fileID: -116094613, guid: 21ea9b6b55db92b47a5b7470fcad53b9, type: 3}
   moveLeft: {fileID: -394544352, guid: 47030a89f6ed04d4bb0f6fedca872d4b, type: 3}
   moveRight: {fileID: -291412365, guid: 2066b5349dbda8b43a988a3d3d36f3aa, type: 3}
+  moveClip:
+    clip: {fileID: 8300000, guid: 945913f70504ecc46964e32f08e76b0a, type: 3}
+    type: 1
+  fxAudio:
+  - clip: {fileID: 8300000, guid: 3aadce67750090f41b4b4a3023f50683, type: 3}
+    type: 1
+  - clip: {fileID: 8300000, guid: a936fb5fce3ad874bb348d9246f73209, type: 3}
+    type: 1
+  - clip: {fileID: 8300000, guid: c5cdedcb3bc874d48bd528c941ae04e8, type: 3}
+    type: 1
+  - clip: {fileID: 8300000, guid: aeb976f3f0633a5409390672efa9637d, type: 3}
+    type: 1
+  - clip: {fileID: 8300000, guid: 767c646f1dc979e4bbbc5336d220278f, type: 3}
+    type: 1
+  - clip: {fileID: 8300000, guid: 74e8c227be8afae4598bf5bd69f5d834, type: 3}
+    type: 1
+  - clip: {fileID: 8300000, guid: 409d8637ebf44274783ac1cb66e10be3, type: 3}
+    type: 1
+  - clip: {fileID: 8300000, guid: ffc36f3ca7d945c498969980dc6f3418, type: 3}
+    type: 1
+  - clip: {fileID: 8300000, guid: 3406e5fe0df78ce44acff3c322502b30, type: 3}
+    type: 1
 --- !u!114 &328007515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2340,7 +2362,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 12.416992, y: -287}
+  m_AnchoredPosition: {x: 12.416992, y: 0}
   m_SizeDelta: {x: -91.058, y: -640.169}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1581812017
@@ -2812,6 +2834,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7d404bfe20fc24c4b8b54d5c32aafad1, type: 2}
   playerCharacter: {fileID: 328007509}
   virtualCamera: {fileID: 1061918951}
+  bgm:
+    clip: {fileID: 8300000, guid: 95f2c795bf564944ca0b8de16669afe2, type: 3}
+    type: 0
 --- !u!4 &1787786685
 Transform:
   m_ObjectHideFlags: 0

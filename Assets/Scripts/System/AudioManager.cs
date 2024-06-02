@@ -1,44 +1,63 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using Utility.CustomClass;
 using Utility.Interface;
+using Utility.CustomClass;
 
 public class AudioManager : Singleton<AudioManager>
 {
     private AudioSource _bgmSource;
-    private Queue<AudioSource> _fxSources;
+    private Queue<AudioSource> _fxSources = new Queue<AudioSource>();
 
-    // 切换bgm途中
+    // 切换BGM时的异步任务
     private UniTask _operation;
-    private CancellationTokenSource _cts;
-    
+    private CancellationTokenSource _cts = new CancellationTokenSource();
+
     private void OnEnable()
     {
-        InitAudioSources();
+        // 订阅事件
         EventManager.Instance.SubscribeEvent<AudioPlayEvent>(PlayAudio);
     }
 
     private void OnDisable()
     {
+        // 取消订阅事件
         EventManager.Instance.UnsubscribeEvent<AudioPlayEvent>(PlayAudio);
     }
 
+    private void Start()
+    {
+        // 使用协程来延迟初始化音频源
+        StartCoroutine(DelayedInitAudioSources());
+    }
+
+    private IEnumerator DelayedInitAudioSources()
+    {
+        // 延迟一帧
+        yield return new WaitForSeconds(0.5f);
+
+        InitAudioSources();
+    }
+
     /// <summary>
-    /// 初始化播放器
+    /// 初始化音频源
     /// </summary>
     private void InitAudioSources()
     {
-        _bgmSource = Instance.gameObject.AddComponent<AudioSource>();
+        _bgmSource = gameObject.AddComponent<AudioSource>();
+        _bgmSource.loop = true;
         
-        for (var i = 1; i <= 10; i++)
+        for (var i = 1; i <= 15; i++)
         {
-            _fxSources.Enqueue(Instance.gameObject.AddComponent<AudioSource>());
+            _fxSources.Enqueue(gameObject.AddComponent<AudioSource>());
         }
+        
+        EventManager.Instance.InvokeEvent(GameManager.Instance.bgm);
     }
-    
+
     /// <summary>
     /// 播放音频
     /// </summary>
@@ -47,7 +66,9 @@ public class AudioManager : Singleton<AudioManager>
     private void PlayAudio(IEventMessage message)
     {
         if (message is not AudioPlayEvent msg) return;
-        
+
+        Debug.Log(msg.clip.name);
+
         switch (msg.type)
         {
             case audioType.FX:
@@ -55,18 +76,17 @@ public class AudioManager : Singleton<AudioManager>
                 if (fxSource.isPlaying)
                 {
                     _fxSources.Enqueue(fxSource);
-                    
-                    fxSource = Instance.gameObject.AddComponent<AudioSource>();
-                    
-                    _fxSources.Enqueue(fxSource);
+
+                    fxSource = gameObject.AddComponent<AudioSource>();
                 }
+                _fxSources.Enqueue(fxSource);
                 
                 fxSource.clip = msg.clip;
                 fxSource.Play();
                 break;
-            
+
             case audioType.BGM:
-                
+
                 if (_operation.Status == UniTaskStatus.Pending)
                 {
                     _cts.Cancel();
@@ -75,16 +95,16 @@ public class AudioManager : Singleton<AudioManager>
                 }
 
                 _operation = SwitchBGM(msg.clip, 0.5f, _cts.Token);
-                
+
                 break;
-            
+
             default:
                 throw new ArgumentOutOfRangeException($"不存在的音频类型");
         }
     }
 
     /// <summary>
-    /// 切换bgm的淡入淡出
+    /// 切换BGM的淡入淡出
     /// </summary>
     /// <param name="clip"></param>
     /// <param name="fadeDuration"></param>
@@ -94,16 +114,18 @@ public class AudioManager : Singleton<AudioManager>
         var startVolume = _bgmSource.volume;
         while (_bgmSource.volume > 0)
         {
+            Debug.Log(1);
             _bgmSource.volume -= startVolume * Time.deltaTime / fadeDuration;
             await UniTask.Yield(ctk);
         }
-        
+
         _bgmSource.Stop();
         _bgmSource.clip = clip;
         _bgmSource.Play();
-        
-        while (_bgmSource.volume <startVolume)
+
+        while (_bgmSource.volume < startVolume)
         {
+            Debug.Log(2);
             _bgmSource.volume += startVolume * Time.deltaTime / fadeDuration;
             await UniTask.Yield(ctk);
         }
@@ -111,7 +133,8 @@ public class AudioManager : Singleton<AudioManager>
     }
 }
 
-public class AudioPlayEvent : ScriptableObject, IEventMessage
+[Serializable]
+public class AudioPlayEvent : IEventMessage
 {
     public AudioClip clip;
     public audioType type;
