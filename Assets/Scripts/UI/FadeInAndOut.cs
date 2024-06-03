@@ -8,6 +8,7 @@ public class FadeInAndOut : MonoBehaviour
 {
     public float fadeTime = 0.5f;
     private Image _sprite;
+    private Tweener _tweener = null;
 
     private void Start()
     {
@@ -18,12 +19,17 @@ public class FadeInAndOut : MonoBehaviour
 
     private void FadeIn(IEventMessage message)
     {
-        _sprite.DOColor(Color.black, fadeTime);
+        _tweener = _sprite.DOColor(Color.black, fadeTime);
+        
+        if (message is not OnFadeIn msg) return;
+        
+        if (msg.fadeOut)
+            _tweener.onComplete += () => _sprite.DOColor(Color.clear, fadeTime);
     }
 
     private void FadeOut(IEventMessage message)
     {
-        _sprite.DOColor(Color.clear, fadeTime);
+        _tweener = _sprite.DOColor(Color.clear, fadeTime);
     }
     
     /// <summary>

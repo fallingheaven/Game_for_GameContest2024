@@ -67,7 +67,7 @@ public class AudioManager : Singleton<AudioManager>
     {
         if (message is not AudioPlayEvent msg) return;
 
-        Debug.Log(msg.clip.name);
+        // Debug.Log(msg.clip.name);
 
         switch (msg.type)
         {
@@ -114,7 +114,6 @@ public class AudioManager : Singleton<AudioManager>
         var startVolume = _bgmSource.volume;
         while (_bgmSource.volume > 0)
         {
-            Debug.Log(1);
             _bgmSource.volume -= startVolume * Time.deltaTime / fadeDuration;
             await UniTask.Yield(ctk);
         }
@@ -125,7 +124,6 @@ public class AudioManager : Singleton<AudioManager>
 
         while (_bgmSource.volume < startVolume)
         {
-            Debug.Log(2);
             _bgmSource.volume += startVolume * Time.deltaTime / fadeDuration;
             await UniTask.Yield(ctk);
         }
