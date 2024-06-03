@@ -1,16 +1,23 @@
+using System;
 using PimDeWitte.UnityMainThreadDispatcher;
 using SaveLoad;
 using UnityEngine;
+using Utility;
 using Utility.CustomClass;
 
 public class GameManager : Singleton<GameManager>
 {
+    public GameObject gameSceneObjects;
+
+    public GameSceneSO menuScene;
     public GameSceneSO currentGameScene;
     public GameSceneSO newGameScene;
     public GameSceneSO[] gameSceneArray;
 
     public GameObject playerCharacter;
     public GameObject virtualCamera;
+
+    private float _currentPlayTime;
     
     // 为了创建实例
     private SaveLoadManager _saveLoadManager;
@@ -32,18 +39,52 @@ public class GameManager : Singleton<GameManager>
 
     private void OnEnable()
     {
-        StartCoroutine(_sceneLoadManager.LoadSceneAsync(currentGameScene));
+        StartCoroutine(_sceneLoadManager.LoadSceneAsync(menuScene));
+    }
+
+    private void Update()
+    {
+        if (currentGameScene.type == SceneType.Level)
+        {
+            _currentPlayTime += Time.deltaTime;
+        }
     }
 
     public void StartNewGame()
     {
-        var newSave = new GameSave();
+        var newSave = new GameSave()
+        {
+            levelIndex = 1,
+            playTime = 0f
+        };
         _saveLoadManager.AddSave(newSave);
         _saveLoadManager.LoadSave(newSave);
+        _currentPlayTime = 0f;
 
         //DONE:跳转到游戏开局
         _sceneLoadManager.UnloadScene(currentGameScene);
         StartCoroutine(_sceneLoadManager.LoadSceneAsync(newGameScene));
+    }
+
+    public void RestartCurrentLevel()
+    {
+        LevelManager.Instance.RefreshLevel();
+    }
+
+    public void BackToMenu()
+    {
+        for (var i = 0; i < gameSceneArray.Length; i++)
+        {
+            if (currentGameScene == gameSceneArray[i])
+            {
+                Debug.Log(i + 1);
+                SaveLoadManager.Instance.UpdateCurrentSave(i + 1, _currentPlayTime);
+                break;
+            }
+        }
+        
+        StartCoroutine(_sceneLoadManager.LoadSceneAsync(menuScene));
+        // Debug.Log(2);
     }
 
     #region 存档相关
@@ -51,10 +92,11 @@ public class GameManager : Singleton<GameManager>
         public void LoadSave(GameSave save)
         {
             _saveLoadManager.LoadSave(save);
+            _currentPlayTime = save.playTime;
             
             // DONE:跳转到游戏存档位置，注意顺序
-            StartCoroutine(SceneLoadManager.Instance.LoadSceneAsync(gameSceneArray[save.levelIndex]));
-            currentGameScene = gameSceneArray[save.levelIndex];
+            StartCoroutine(SceneLoadManager.Instance.LoadSceneAsync(gameSceneArray[save.levelIndex - 1]));
+            // currentGameScene = gameSceneArray[save.levelIndex];
         }
     
         public void DeleteSave(GameSave save)

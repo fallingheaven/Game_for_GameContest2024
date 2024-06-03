@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using Event;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
@@ -24,6 +25,7 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
 
     public void UnloadScene(GameSceneSO sceneAsset)
     {
+        // Debug.Log(sceneAsset.targetScene.Asset.name);
         if (!_isLoaded.ContainsKey(sceneAsset.targetScene))
         {
             Debug.LogWarning($"{sceneAsset.targetScene} 未被加载，卸载失败");
@@ -44,9 +46,19 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
     /// <returns></returns>
     public IEnumerator LoadSceneAsync(GameSceneSO sceneAsset, bool forceLoad = false)
     {
+        var fadeInMsg = new OnFadeIn();
+        EventManager.Instance.InvokeEvent(fadeInMsg);
+
+        yield return new WaitForSeconds(0.5f);
+        
         if (sceneAsset.type == SceneType.Level)
         {
             LevelManager.Instance.currentLevel = sceneAsset;
+            GameManager.Instance.gameSceneObjects.SetActive(true);
+        }
+        else
+        {
+            GameManager.Instance.gameSceneObjects.SetActive(false);
         }
         
         if (GameManager.Instance.currentGameScene != sceneAsset)
@@ -79,10 +91,10 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
 
         var onSceneLoadedMessage = new AfterSceneLoadEvent(operation);
         EventManager.Instance.InvokeEvent<AfterSceneLoadEvent>(onSceneLoadedMessage);
+        GameManager.Instance.currentGameScene = sceneAsset;
 
         if (sceneAsset.existPlayer)
         {
-            
             GameManager.Instance.playerCharacter.transform.position = sceneAsset.initPosition;
             GameManager.Instance.playerCharacter.SetActive(true);
         }
@@ -94,6 +106,8 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
         {
             msg.operation.Result.ActivateAsync();
         }
-        
+
+        var fadeOutMsg = new OnFadeOut();
+        EventManager.Instance.InvokeEvent(fadeOutMsg);
     }
 }

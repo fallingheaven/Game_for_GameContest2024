@@ -156,8 +156,7 @@ public class CharacterBehavior : MonoBehaviour
         }
         else//融合
         {
-            Element fusionResult;
-            if (Fusion.FusionMap[CurrentElement].TryGetValue(targetElement, out fusionResult))
+            if (Fusion.FusionMap[CurrentElement].TryGetValue(targetElement, out var fusionResult))
             {
                 CurrentElement = fusionResult;
                 _elementUI.UpdateElementBallColor();

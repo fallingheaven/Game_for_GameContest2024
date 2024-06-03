@@ -68,6 +68,12 @@ public class SaveLoadManager : Singleton<SaveLoadManager>
         public void RemoveSave(GameSave deletedSave) => GetSaveArray.saves.Remove(deletedSave);
     
         public void LoadSave(GameSave save) => _currentSave = save;
+
+        public void UpdateCurrentSave(int index, float playTime)
+        {
+            _currentSave.levelIndex = index;
+            _currentSave.playTime = playTime;
+        }
         
         /// <summary>
         /// 重置存档

@@ -142,7 +142,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &51311417
 RectTransform:
   m_ObjectHideFlags: 0
@@ -418,7 +418,7 @@ GameObject:
   m_Component:
   - component: {fileID: 182539709}
   - component: {fileID: 182539711}
-  - component: {fileID: 182539710}
+  - component: {fileID: 182539712}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -446,20 +446,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &182539710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 182539708}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c34ff2144f71fa844a3c8c8ca98115cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  saveInfoPanelPrefab: {fileID: 3823660654314299980, guid: 2a4daca8283d1674584d9c3d51024f03, type: 3}
-  choicePanelPrefab: {fileID: 2147111405698587501, guid: 9d1ea3727fb083f4483835381e7ce342, type: 3}
 --- !u!114 &182539711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -486,6 +472,20 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &182539712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 182539708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c34ff2144f71fa844a3c8c8ca98115cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveInfoPanelPrefab: {fileID: 3823660654314299980, guid: 2a4daca8283d1674584d9c3d51024f03, type: 3}
+  choicePanelPrefab: {fileID: 2147111405698587501, guid: 9d1ea3727fb083f4483835381e7ce342, type: 3}
 --- !u!1 &201034371
 GameObject:
   m_ObjectHideFlags: 0
@@ -1022,7 +1022,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 182539710}
+      - m_Target: {fileID: 182539712}
         m_TargetAssemblyTypeName: SavePanelManager, Assembly-CSharp
         m_MethodName: StartNewGame
         m_Mode: 1

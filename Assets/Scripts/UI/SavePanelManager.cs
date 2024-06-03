@@ -6,20 +6,18 @@ using SaveLoad;
 using UnityEngine.UI;
 using Utility.CustomClass;
 
-public class SavePanelManager : Singleton<SavePanelManager>
+public class SavePanelManager : MonoBehaviour
 {
+    public static SavePanelManager Instance { get; set; }
+
     public GameObject saveInfoPanelPrefab;
     public GameObject choicePanelPrefab;
 
     private GameSaveArray _saveArray;
-
-    private void Awake()
-    {
-        SavePanelManager.Instance = this;
-    }
-
+    
     private void OnEnable()
     {
+        Instance = this;
         Task.Run(ShowSaves);
     }
 
@@ -52,6 +50,7 @@ public class SavePanelManager : Singleton<SavePanelManager>
         private async Task GetSaves()
         {
             _saveArray = await Task.Run(() => SaveLoadManager.Instance.GetSaveArray);
+            // Debug.Log(_saveArray.saves[0].levelIndex);
         }
     
         private IEnumerator ShowSaveInOrder()
@@ -68,6 +67,7 @@ public class SavePanelManager : Singleton<SavePanelManager>
                 
                 panel.save = save;
                 panel.choicePanel = choicePanel;
+                panel.InitPanelInfo();
 
                 yield return new WaitForSeconds(0.1f);
             }

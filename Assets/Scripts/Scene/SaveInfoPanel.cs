@@ -12,16 +12,17 @@ public class SaveInfoPanel : MonoBehaviour
     public TextMeshProUGUI playTimeInfo;
     public TextMeshProUGUI startNewGame;
 
-    private void OnEnable()
-    {
-        InitPanelInfo();
-    }
+    // private void OnEnable()
+    // {
+    //     InitPanelInfo();
+    // }
 
     /// <summary>
     /// 激活后初始化信息
     /// </summary>
-    private void InitPanelInfo()
+    public void InitPanelInfo()
     {
+        // Debug.Log(save.levelIndex);
         if (save != null)
         {
             startNewGame.text = "";
